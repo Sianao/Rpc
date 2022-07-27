@@ -2,7 +2,6 @@ package api
 
 import (
 	"Rpc/decode"
-	"github.com/sirupsen/logrus"
 )
 
 func (s *Services) Listen() {
@@ -18,7 +17,7 @@ func (s *Services) Listen() {
 		case 2:
 			go s.Call(c, s.con)
 		case 3:
-			logrus.Info("ping")
+			//ping message  不做处理
 		}
 	}
 }
