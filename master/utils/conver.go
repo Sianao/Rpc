@@ -33,6 +33,7 @@ func ParamService(c map[string]interface{}) (service string, method []string, we
 	return
 }
 
+// ReadFromCon 从连接中读取请求
 func ReadFromCon(con net.Conn) (decode.CMS, error) {
 	m := make([]byte, 1024)
 	read, err := con.Read(m)
@@ -44,6 +45,8 @@ func ReadFromCon(con net.Conn) (decode.CMS, error) {
 	c := decode.Decode(m[0 : read+1])
 	return c, nil
 }
+
+// WriteToCon 向连接中写信息
 func WriteToCon(con net.Conn, msg decode.CMS) error {
 	bytes, err := decode.Encode(msg)
 	if err != nil {
