@@ -4,8 +4,9 @@ import (
 	"Rpc/decode"
 	"Rpc/master/master"
 	"errors"
-	"github.com/sirupsen/logrus"
 	"net"
+
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -44,9 +45,9 @@ func Call(c decode.CMS, con net.Conn) {
 		Id:      c.Id,
 		Message: make(map[string]interface{}),
 	}
+	//用于处理不存在的服务调用
 	if !target || !ok {
 		call.Message[ERR] = NOMETHOD
-		//用于处理不存在的服务调用
 		CallBackErr(call, con)
 		delete(master.Job.Con, c.Id)
 		return
@@ -60,6 +61,8 @@ func Call(c decode.CMS, con net.Conn) {
 	if err != nil {
 		return
 	}
+
+	// 负载均衡选取最优服务器发送
 	err = LoadBalance(s.Cons, code)
 	if err != nil {
 		CallBackErr(decode.CMS{
@@ -93,6 +96,8 @@ func CallBackErr(msg decode.CMS, con net.Conn) {
 	con.Close()
 	return
 }
+
+// LoadBalance  负载均衡类似nginx 的权重计算 略有省略
 func LoadBalance(cons []*master.Con, msg []byte) error {
 	var (
 		total int64 = 0
