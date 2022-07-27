@@ -9,7 +9,7 @@
 
 - 负载均衡
 
-- 超时检测var Controller *Center
+- 超时检测
 
 - 服务重连
 
