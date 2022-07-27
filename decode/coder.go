@@ -1,7 +1,8 @@
 package decode
 
+// 信息交互方式  采用messagepackege 进行数据交互
+// 据说比json 更好 有更好的压缩 编解码也更快
 type CMS struct {
-	// c to m 服务端发送给master 的信息
 	OpenCode int64                  `msg:"open_code"`
 	Id       int64                  `msg:"id"`
 	Message  map[string]interface{} `msg:"message"`

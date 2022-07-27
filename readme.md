@@ -11,10 +11,6 @@
 
 - 超时检测var Controller *Center
 
-  // jobs 保存返回信息 用于在调用的时候进行处理
-
-  var Job *Jobs
-
 - 服务重连
 
 - 服务扩展
