@@ -3,7 +3,6 @@ package logic
 import (
 	"Rpc/decode"
 	"errors"
-	"fmt"
 	"net"
 )
 
@@ -32,9 +31,8 @@ func Call(c net.Conn, d decode.CMS) ([]interface{}, error) {
 	case 4:
 		re, ok := msg.Message["err"]
 		if ok {
-			ret, ok := re.(string)
-			fmt.Println(ret, ok)
-			return nil, errors.New(re.(string))
+			re, _ := re.(string)
+			return nil, errors.New(re)
 		}
 		break
 	}

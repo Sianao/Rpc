@@ -31,7 +31,7 @@ func (s *Services) Call(c decode.CMS, con net.Conn) {
 		}
 	}
 	method, _ := v.(string)
-	fmt.Println("method", method)
+	fmt.Println("call the method", method, " with param ", param)
 	result := s.Service.Method[method].Call(m)
 	var re []interface{}
 	for _, v := range result {
